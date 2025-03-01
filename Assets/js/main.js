@@ -13,6 +13,11 @@ camera.position.set(5, 5, 20);
 camera.lookAt(0, 0, 1);
 scene.add(camera);
 
+// Lighting
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(10, 10, 10);
+scene.add(light);
+
 CreateFlowerField(scene);
 
 renderer = new THREE.WebGLRenderer();
