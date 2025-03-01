@@ -11,24 +11,36 @@ export function CreateFlowerField(scene) {
     platform.position.y = 0;
     scene.add(platform);
 
-    for (let i = 0; i < 250; i++) {
-        // Generate random angle and radius for circular distribution
-        const angle = Math.random() * 2 * Math.PI;
-        const radius = Math.sqrt(Math.random()) * 9.5; // Adjust radius to fit within platform
+    const placedPositions = [];  // Store positions of placed flowers
+    const minDistance = 1;     // Distance between flowers
 
-        // Calculate flower position based on polar coordinates
-        const x = radius * Math.cos(angle);
-        const z = radius * Math.sin(angle);
+    for (let i = 0; i < 200; i++) {
+        let position;
+        let isValidPosition = false;
 
+        // Retry generating position until a valid spot is found
+        while (!isValidPosition) {
+            const angle = Math.random() * 2 * Math.PI;
+            const radius = Math.sqrt(Math.random()) * 9.5;
+
+            const x = radius * Math.cos(angle);
+            const z = radius * Math.sin(angle);
+            position = new THREE.Vector3(x, 0.5, z);
+
+            // Check for overlap with previously placed flowers
+            isValidPosition = placedPositions.every((pos) => position.distanceTo(pos) >= minDistance);
+        }
+
+        // Create the flower at the validated position
         const flower = new THREE.Mesh(
             new THREE.CylinderGeometry(0.1, 0.1, 1, 6),
             FlowerMaterial
         );
 
-        flower.position.set(x, 0.5, z);
+        flower.position.copy(position);
         scene.add(flower);
+        placedPositions.push(position);  // Save position
 
-        // Create flower head on top of the stem
         CreateFlowerHead(flower.position, scene);
     }
 }
