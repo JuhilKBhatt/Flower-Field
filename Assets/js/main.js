@@ -1,6 +1,8 @@
 import * as THREE from './build/three.module.js';
 import { OrbitControls } from './build/OrbitControls.js';
 import { CreateFlowerField } from './flowerField.js';
+import { InteractionHandler } from './interactionHandler.js';
+import { animatePetals } from './animationManager.js';
 
 let camera, scene, renderer, controls;
 
@@ -20,6 +22,8 @@ scene.add(light);
 
 // Create the flower field
 CreateFlowerField(scene);
+
+InteractionHandler(scene, camera, renderer);
 
 // Create the renderer
 renderer = new THREE.WebGLRenderer();
@@ -43,6 +47,7 @@ window.addEventListener('resize', () => {
 function animate() {
     requestAnimationFrame(animate);
     controls.update();  // Update orbit controls
+    animatePetals();
     renderer.render(scene, camera);
 }
 animate();
