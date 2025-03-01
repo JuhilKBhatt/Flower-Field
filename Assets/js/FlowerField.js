@@ -2,11 +2,11 @@ import * as THREE from './build/three.module.js';
 import { CreateFlowerHead } from './FlowerHead.js';
 
 export function CreateFlowerField(scene) {
-    const FlowerMaterial = new THREE.MeshStandardMaterial({ color: 0x00FF00 }); // Green stem
+    const FlowerMaterial = new THREE.MeshStandardMaterial({ color: 0x00FF00 }); // Green Flower stem
 
     // Create a circular platform
     const PlatformGeometry = new THREE.CylinderGeometry(10, 10, 0.5, 32);
-    const PlatformMaterial = new THREE.MeshStandardMaterial({ color: 0x8B4513 }); // Brown color
+    const PlatformMaterial = new THREE.MeshStandardMaterial({ color: 0x7CFC00 }); // Grass colour
     const platform = new THREE.Mesh(PlatformGeometry, PlatformMaterial);
     platform.position.y = 0;
     scene.add(platform);

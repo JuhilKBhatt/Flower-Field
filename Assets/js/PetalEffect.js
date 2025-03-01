@@ -19,7 +19,11 @@ export function PetalEffect(MousePosition, scene) {
             0.1 + Math.random() * 0.2,
             (Math.random() - 0.5) * 0.2
         );
-        petals.push(petal);
+
+        petal.RenderTime = 1000; // 1 second
+        petal.RenderedTime = Date.now();
+
+        petals.push({mesh: petal, scene}); // Store each petal and scene for AnimationManager.js
         scene.add(petal);
     }
 }
