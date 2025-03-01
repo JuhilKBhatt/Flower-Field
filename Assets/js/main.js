@@ -1,4 +1,5 @@
 import * as THREE from './build/three.module.js';
+import { CreateFlowerField } from './flowerField.js';
 
 var camera, scene, renderer;
 			
@@ -11,6 +12,8 @@ camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight,
 camera.position.set(5, 5, 20);
 camera.lookAt(0, 0, 1);
 scene.add(camera);
+
+CreateFlowerField(scene);
 
 renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
