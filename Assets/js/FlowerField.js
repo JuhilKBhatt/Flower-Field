@@ -1,5 +1,6 @@
 import * as THREE from './build/three.module.js';
 import { CreateFlowerHead } from './FlowerHead.js';
+import { RandomNumber } from './Utils.js';
 
 export function CreateFlowerField(scene) {
     const FlowerMaterial = new THREE.MeshStandardMaterial({ color: 0x00FF00 }); // Green Flower stem
@@ -11,7 +12,7 @@ export function CreateFlowerField(scene) {
     platform.position.y = 0;
     scene.add(platform);
 
-    const placedPositions = [];  // Store positions of placed flowers
+    const placedPositions = [];  // Store positions flowers
     const minDistance = 1;     // Distance between flowers
 
     for (let i = 0; i < 200; i++) {
@@ -33,7 +34,7 @@ export function CreateFlowerField(scene) {
 
         // Create the flower at the validated position
         const flower = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.1, 0.1, 1, 6),
+            new THREE.CylinderGeometry(0.1, 0.1, RandomNumber(1,3), 6),
             FlowerMaterial
         );
 
