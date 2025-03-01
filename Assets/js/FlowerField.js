@@ -1,4 +1,5 @@
 import * as THREE from './build/three.module.js';
+import { CreateFlowerHead } from './FlowerHead.js';
 
 export function CreateFlowerField(scene) {
     const flowerMaterial = new THREE.MeshStandardMaterial({ color: 0x00FF00 }); // Colour: Pink
@@ -13,5 +14,7 @@ export function CreateFlowerField(scene) {
             (Math.random() - 0.5) * 20
         );
         scene.add(flower);
+        
+        CreateFlowerHead(flower.position, scene)
     }
 }
