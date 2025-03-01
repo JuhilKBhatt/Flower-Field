@@ -1,5 +1,6 @@
 import * as THREE from './build/three.module.js';
 import { CreateFlowerField } from './flowerField.js';
+import { OrbitControls } from './build/OrbitControls.js';
 
 var camera, scene, renderer;
 			
