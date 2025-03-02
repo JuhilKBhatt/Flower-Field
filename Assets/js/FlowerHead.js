@@ -2,14 +2,14 @@ import * as THREE from './build/three.module.js';
 import { RandomColour } from './Utils.js';
 import { RandomNumber } from './Utils.js';
 
-export function CreateFlowerHead(StemPosition, scene) {
+export function CreateFlowerHead(StemPosition, StemHeight, scene) {
     const FlowerHead = new THREE.Group();
 
     const PistilMaterial = new THREE.MeshStandardMaterial({ color: 0xFFFF00 }); // Colour: yellow
     const pistil = new THREE.Mesh(new THREE.SphereGeometry(0.20, 8, 8), PistilMaterial);
     pistil.position.set(
         StemPosition.x,
-        StemPosition.y + 0.6,
+        StemPosition.y + StemHeight/2 + 0.1,
         StemPosition.z
     );
     FlowerHead.add(pistil);
@@ -28,7 +28,7 @@ export function CreateFlowerHead(StemPosition, scene) {
         const angle = (i / PetalCount) * Math.PI * 2;
         petal.position.set(
             StemPosition.x + Math.cos(angle) * 0.3,
-            StemPosition.y + 0.6,
+            StemPosition.y + StemHeight/2 + 0.1,
             StemPosition.z + Math.sin(angle) * 0.3
         );
         petal.rotation.x = Math.PI / 2;

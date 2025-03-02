@@ -18,6 +18,7 @@ export function CreateFlowerField(scene) {
     for (let i = 0; i < 200; i++) {
         let position;
         let isValidPosition = false;
+        let StemHeight = RandomNumber(1,2);
 
         // Retry generating position until a valid spot is found
         while (!isValidPosition) {
@@ -34,7 +35,7 @@ export function CreateFlowerField(scene) {
 
         // Create the flower at the validated position
         const flower = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.1, 0.1, RandomNumber(1,3), 6),
+            new THREE.CylinderGeometry(0.1, 0.1, StemHeight, 6),
             FlowerMaterial
         );
 
@@ -42,6 +43,6 @@ export function CreateFlowerField(scene) {
         scene.add(flower);
         placedPositions.push(position);  // Save position
 
-        CreateFlowerHead(flower.position, scene);
+        CreateFlowerHead(flower.position, StemHeight, scene);
     }
 }
