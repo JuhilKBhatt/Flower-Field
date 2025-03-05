@@ -21,7 +21,24 @@ light.position.set(10, 10, 10);
 scene.add(light);
 
 // Create the flower field
-CreateFlowerField(scene);
+window.regenerateFlowerField = () => {
+    // Capture user inputs
+    const flowerParams = {
+        count: parseInt(document.getElementById('flowerCount').value),
+        minStemHeight: parseFloat(document.getElementById('minStemHeight').value),
+        maxStemHeight: parseFloat(document.getElementById('maxStemHeight').value),
+        minPetalCount: parseInt(document.getElementById('minPetalCount').value),
+        maxPetalCount: parseInt(document.getElementById('maxPetalCount').value)
+    };
+
+    // Clear previous flowers
+    while (scene.children.length > 0) {
+        scene.remove(scene.children[0]);
+    }
+
+    // Regenerate flowers with new parameters
+    CreateFlowerField(scene, flowerParams);
+};
 
 InteractionHandler(scene, camera, renderer);
 

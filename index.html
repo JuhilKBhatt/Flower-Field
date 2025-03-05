@@ -1,12 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juhil Kalpeshkumar Bhatt - 24577013 - AT_3.1</title>
     <link rel="stylesheet" href="./Assets/css/styles.css" />
-  </head>
-  <body>
-    <script type="module" src="./Assets/js/main.js"></script>
-  </body>
+    <style>
+        #controls {
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+        }
+        label {
+            margin-right: 5px;
+        }
+        input {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+    <label>Flower Count: <input type="number" id="flowerCount" value="200" min="1" max="500"></label><br>
+    <label>Min Stem Height: <input type="number" id="minStemHeight" value="1" min="0.5" max="5" step="0.1"></label><br>
+    <label>Max Stem Height: <input type="number" id="maxStemHeight" value="3" min="0.5" max="5" step="0.1"></label><br>
+    <label>Petal Count Min: <input type="number" id="minPetalCount" value="8" min="1" max="20"></label><br>
+    <label>Petal Count Max: <input type="number" id="maxPetalCount" value="15" min="1" max="20"></label><br>
+    <button onclick="regenerateFlowerField()">Regenerate Field</button>
+</div>
+
+<canvas id="scene"></canvas>
+<script type="module" src="./Assets/js/main.js"></script>
+
+</body>
 </html>
