@@ -6,7 +6,7 @@ export function CreateFlowerField(scene, flowerParams) {
     const FlowerMaterial = new THREE.MeshStandardMaterial({ color: 0x00FF00 }); // Green Flower stem
 
     // Create a circular platform
-    const PlatformGeometry = new THREE.CylinderGeometry(10, 10, 0.5, 32);
+    const PlatformGeometry = new THREE.CylinderGeometry(10, 10, 0.75, 32);
     const PlatformMaterial = new THREE.MeshStandardMaterial({ color: 0x7CFC00 }); // Grass colour
     const platform = new THREE.Mesh(PlatformGeometry, PlatformMaterial);
     platform.position.y = 0;

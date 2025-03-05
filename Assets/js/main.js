@@ -16,9 +16,16 @@ camera.position.set(5, 20, 20);
 scene.add(camera);
 
 // Add lighting
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(10, 10, 10);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
+const light = new THREE.DirectionalLight(0xffffff, 1.5);
+light.position.set(15, 20, 10);
+light.castShadow = true;
 scene.add(light);
+
+const hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.4);
+scene.add(hemiLight);
 
 // Create the flower field
 window.regenerateFlowerField = () => {
@@ -43,8 +50,10 @@ window.regenerateFlowerField = () => {
 InteractionHandler(scene, camera, renderer);
 
 // Create the renderer
-renderer = new THREE.WebGLRenderer();
+renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;         // Enable shadows
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;  // Soft shadows
 document.body.appendChild(renderer.domElement);
 
 // Add OrbitControls

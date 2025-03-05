@@ -2,7 +2,7 @@ import * as THREE from './build/three.module.js';
 import { RandomColour } from './Utils.js';
 import { RandomNumber } from './Utils.js';
 
-export function CreateFlowerHead(StemPosition, StemHeight, scene) {
+export function CreateFlowerHead(StemPosition, StemHeight, scene, flowerParams) {
     const FlowerHead = new THREE.Group();
 
     const PistilMaterial = new THREE.MeshStandardMaterial({ color: 0xFFFF00 }); // Colour: yellow
@@ -16,7 +16,7 @@ export function CreateFlowerHead(StemPosition, StemHeight, scene) {
 
     const PetalMaterial = new THREE.MeshStandardMaterial({ color: RandomColour() });
 
-    const PetalCount = RandomNumber(8, 15);
+    const PetalCount = RandomNumber(flowerParams.minPetalCount, flowerParams.maxPetalCount);
 
     for (let i = 0; i < PetalCount; i++) {
         const petalWidth = RandomNumber(0.05, 0.15);
