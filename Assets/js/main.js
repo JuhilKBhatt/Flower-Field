@@ -11,25 +11,26 @@ scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87CEEB); // Sky blue
 
 // Create the camera
-camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.00001, 1000);
+camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(5, 20, 20);
 scene.add(camera);
 
-// Add lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-
-const light = new THREE.DirectionalLight(0xffffff, 1.5);
-light.position.set(15, 20, 10);
-light.castShadow = true;
+// Add lights
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(10, 20, 10);
 scene.add(light);
 
-const hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.4);
-scene.add(hemiLight);
+// Create the renderer
+renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Add grid helper for reference
+const gridHelper = new THREE.GridHelper(20, 20);
+scene.add(gridHelper);
 
 // Create the flower field
 window.regenerateFlowerField = () => {
-    // Capture user inputs
     const flowerParams = {
         count: parseInt(document.getElementById('flowerCount').value),
         minStemHeight: parseFloat(document.getElementById('minStemHeight').value),
@@ -38,30 +39,21 @@ window.regenerateFlowerField = () => {
         maxPetalCount: parseInt(document.getElementById('maxPetalCount').value)
     };
 
-    // Clear previous flowers
-    while (scene.children.length > 0) {
-        scene.remove(scene.children[0]);
+    while (scene.children.length > 2) {  // Preserve camera, lights, and grid
+        scene.remove(scene.children[2]);
     }
 
-    // Regenerate flowers with new parameters
     CreateFlowerField(scene, flowerParams);
 };
-window.regenerateFlowerField();// Create the init flower field
+window.regenerateFlowerField();  // Create the initial flower field
 
 InteractionHandler(scene, camera, renderer);
-
-// Create the renderer
-renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;         // Enable shadows
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;  // Soft shadows
-document.body.appendChild(renderer.domElement);
 
 // Add OrbitControls
 controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;  // Smooth the camera movement
 controls.dampingFactor = 0.25;
-controls.maxPolarAngle = Math.PI / 2;  // Limit vertical rotation
+controls.maxPolarAngle = Math.PI / 1.8;  // Limit vertical rotation
 
 // Handle window resize
 window.addEventListener('resize', () => {
