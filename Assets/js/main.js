@@ -1,7 +1,6 @@
 import * as THREE from './build/three.module.js';
 import { OrbitControls } from './build/OrbitControls.js';
 import { CreateFlowerField } from './flowerField.js';
-import { InteractionHandler } from './interactionHandler.js';
 import { animatePetals } from './animationManager.js';
 import { PetalEffect } from './PetalEffect.js';
 
