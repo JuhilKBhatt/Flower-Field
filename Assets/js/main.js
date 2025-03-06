@@ -46,6 +46,7 @@ window.regenerateFlowerField = () => {
     // Regenerate flowers with new parameters
     CreateFlowerField(scene, flowerParams);
 };
+window.regenerateFlowerField();// Create the init flower field
 
 InteractionHandler(scene, camera, renderer);
 
