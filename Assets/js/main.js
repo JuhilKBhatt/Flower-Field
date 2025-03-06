@@ -8,7 +8,7 @@ let camera, scene, renderer, controls;
 
 // Create the scene
 scene = new THREE.Scene();
-scene.background = new THREE.Color(0x87CEEB);  // Sky blue
+scene.background = new THREE.Color(0x87CEEB);
 
 // Create the camera
 camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -49,12 +49,68 @@ window.addEventListener('resize', () => {
 
 // Create the flower field
 window.regenerateFlowerField = () => {
+    // Define max limits
+    const maxFlowers = 500;
+    const minFlowers = 1;
+    const minStem = 0.5;
+    const maxStem = 5;
+    const minPetals = 1;
+    const maxPetals = 20;
+
+    // Get input values and enforce limits
+    let flowerCount = parseInt(document.getElementById('flowerCount').value);
+    let minStemHeight = parseFloat(document.getElementById('minStemHeight').value);
+    let maxStemHeight = parseFloat(document.getElementById('maxStemHeight').value);
+    let minPetalCount = parseInt(document.getElementById('minPetalCount').value);
+    let maxPetalCount = parseInt(document.getElementById('maxPetalCount').value);
+
+    // Check and correct values if out of bounds
+    if (flowerCount > maxFlowers) {
+        flowerCount = maxFlowers;
+        alert(`Maximum allowed flowers is ${maxFlowers}. Limit applied.`);
+    } else if (flowerCount < minFlowers) {
+        flowerCount = minFlowers;
+        alert(`Minimum allowed flowers is ${minFlowers}. Limit applied.`);
+    }
+
+    if (minStemHeight < minStem) {
+        minStemHeight = minStem;
+        alert(`Minimum stem height is ${minStem}. Limit applied.`);
+    } else if (minStemHeight > maxStem) {
+        minStemHeight = maxStem;
+        alert(`Maximum stem height is ${maxStem}. Limit applied.`);
+    }
+
+    if (maxStemHeight > maxStem) {
+        maxStemHeight = maxStem;
+        alert(`Maximum stem height is ${maxStem}. Limit applied.`);
+    } else if (maxStemHeight < minStemHeight) {
+        maxStemHeight = minStemHeight;
+        alert(`Max stem height cannot be less than min stem height. Corrected.`);
+    }
+
+    if (minPetalCount < minPetals) {
+        minPetalCount = minPetals;
+        alert(`Minimum petal count is ${minPetals}. Limit applied.`);
+    } else if (minPetalCount > maxPetals) {
+        minPetalCount = maxPetals;
+        alert(`Minimum petal count cannot exceed ${maxPetals}. Limit applied.`);
+    }
+
+    if (maxPetalCount > maxPetals) {
+        maxPetalCount = maxPetals;
+        alert(`Maximum petal count is ${maxPetals}. Limit applied.`);
+    } else if (maxPetalCount < minPetalCount) {
+        maxPetalCount = minPetalCount;
+        alert(`Max petal count cannot be less than min petal count. Corrected.`);
+    }
+
     const flowerParams = {
-        count: parseInt(document.getElementById('flowerCount').value),
-        minStemHeight: parseFloat(document.getElementById('minStemHeight').value),
-        maxStemHeight: parseFloat(document.getElementById('maxStemHeight').value),
-        minPetalCount: parseInt(document.getElementById('minPetalCount').value),
-        maxPetalCount: parseInt(document.getElementById('maxPetalCount').value)
+        count: flowerCount,
+        minStemHeight: minStemHeight,
+        maxStemHeight: maxStemHeight,
+        minPetalCount: minPetalCount,
+        maxPetalCount: maxPetalCount
     };
 
     while (scene.children.length > 2) {

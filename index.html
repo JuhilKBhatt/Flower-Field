@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,22 +18,25 @@
             left: 10px;
             z-index: 1;
         }
+
         label {
             margin-right: 5px;
         }
+
         input {
             margin: 5px;
         }
     </style>
 </head>
+
 <body>
 
 <div id="controls">
     <label>Flower Count: <input type="number" id="flowerCount" value="200" min="1" max="500"></label><br>
-    <label>Min Stem Height: <input type="number" id="minStemHeight" value="1" min="0.5" max="5" step="0.1"></label><br>
-    <label>Max Stem Height: <input type="number" id="maxStemHeight" value="3" min="0.5" max="5" step="0.1"></label><br>
-    <label>Petal Count Min: <input type="number" id="minPetalCount" value="8" min="1" max="20"></label><br>
-    <label>Petal Count Max: <input type="number" id="maxPetalCount" value="15" min="1" max="20"></label><br>
+    <label>Flower Min Stem Height: <input type="number" id="minStemHeight" value="1" step="0.1" min="0.5" max="5"></label><br>
+    <label>Flower Max Stem Height: <input type="number" id="maxStemHeight" value="3" step="0.1" min="0.5" max="5"></label><br>
+    <label>Flower Petal Count Min: <input type="number" id="minPetalCount" value="8" min="1" max="20"></label><br>
+    <label>Flower Petal Count Max: <input type="number" id="maxPetalCount" value="15" min="1" max="20"></label><br>
     <button onclick="regenerateFlowerField()">Regenerate Field</button>
 </div>
 
@@ -40,4 +44,5 @@
 <script type="module" src="./Assets/js/main.js"></script>
 
 </body>
+
 </html>
