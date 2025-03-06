@@ -33,7 +33,7 @@ document.body.appendChild(renderer.domElement);
 controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
-controls.maxPolarAngle = Math.PI / 2;
+controls.maxPolarAngle = Math.PI / 1.8;
 
 // Handle mouse click for petal effect
 window.addEventListener('click', (event) => {
