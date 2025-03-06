@@ -50,7 +50,7 @@ window.addEventListener('resize', () => {
 // Create the flower field
 window.regenerateFlowerField = () => {
     // Define max limits
-    const maxFlowers = 500;
+    const maxFlowers = 200;
     const minFlowers = 1;
     const minStem = 0.5;
     const maxStem = 5;
