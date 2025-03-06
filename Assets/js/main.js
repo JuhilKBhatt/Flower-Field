@@ -11,14 +11,21 @@ scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87CEEB); // Sky blue
 
 // Create the camera
-camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
 camera.position.set(5, 20, 20);
 scene.add(camera);
 
 // Add lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);  // Soft white light for basic visibility
+scene.add(ambientLight);
+
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(10, 20, 10);
+light.castShadow = true;  // Enable shadows if needed
 scene.add(light);
+
+const hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.4);  // Sky and ground lighting
+scene.add(hemiLight);
 
 // Create the renderer
 renderer = new THREE.WebGLRenderer({ antialias: true });
