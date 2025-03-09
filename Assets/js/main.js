@@ -3,9 +3,9 @@ import { OrbitControls } from './build/OrbitControls.js';
 import { CreateFlowerField } from './flowerField.js';
 import { animatePetals } from './animationManager.js';
 import { PetalEffect } from './PetalEffect.js';
-import { CreateGrassField } from './GrassField.js';
+import { CreateGrassField, animateGrass } from './GrassField.js';
 
-let camera, scene, renderer, controls, animateGrass;
+let camera, scene, renderer, controls;
 
 // Create the scene
 scene = new THREE.Scene();
@@ -67,8 +67,6 @@ const grassParams = {
     areaRadius: 10      // Area covered by grass
 };
 
-
-
 // Function to enforce input limits
 function enforceLimits(value, min, max, name) {
     if (value < min) {
@@ -116,8 +114,11 @@ window.regenerateFlowerField();
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
+    const time = performance.now() * 0.001;  // Time in seconds
+
     controls.update();
     animatePetals();
+    animateGrass(time, grassParams);  // Animate grass sway
     renderer.render(scene, camera);
 }
 animate();
