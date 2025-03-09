@@ -52,8 +52,8 @@ window.regenerateFlowerField = () => {
     // Define max limits
     const maxFlowers = 200;
     const minFlowers = 1;
-    const minStem = 0.5;
-    const maxStem = 5;
+    const minStem = 0.25;
+    const maxStem = 3;
     const minPetals = 1;
     const maxPetals = 20;
 
