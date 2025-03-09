@@ -3,8 +3,9 @@ import { OrbitControls } from './build/OrbitControls.js';
 import { CreateFlowerField } from './flowerField.js';
 import { animatePetals } from './animationManager.js';
 import { PetalEffect } from './PetalEffect.js';
+import { CreateGrassField } from './GrassField.js';
 
-let camera, scene, renderer, controls;
+let camera, scene, renderer, controls, animateGrass;
 
 // Create the scene
 scene = new THREE.Scene();
@@ -57,6 +58,17 @@ const limits = {
     maxPetals: 20
 };
 
+// Grass parameters
+const grassParams = {
+    count: 1000,        // Number of grass blades
+    height: 0.5,          // Height of each blade
+    width: 0.1,         // Width of each blade
+    windSpeed: 1.0,     // Speed of wind sway
+    areaRadius: 10      // Area covered by grass
+};
+
+
+
 // Function to enforce input limits
 function enforceLimits(value, min, max, name) {
     if (value < min) {
@@ -93,6 +105,9 @@ window.regenerateFlowerField = () => {
 
     // Create new flower field
     CreateFlowerField(scene, flowerParams);
+
+    // Create and add grass field to the scene
+    CreateGrassField(scene, grassParams);
 };
 
 // Initial field generation
