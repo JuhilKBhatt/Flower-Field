@@ -34,7 +34,7 @@ export function PetalEffect(event, camera, scene, renderer) {
                 (Math.random() - 0.5) * 0.2
             );
 
-            petal.RenderTime = 1000;  // 1 second
+            petal.RenderTime = 500;  // 0.5 second
             petal.RenderedTime = Date.now();
 
             petals.push({ mesh: petal, scene });

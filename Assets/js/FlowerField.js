@@ -6,7 +6,7 @@ export function CreateFlowerField(scene, flowerParams) {
     const FlowerMaterial = new THREE.MeshStandardMaterial({ color: 0x00FF00 }); // Green Flower stem
 
     // Create a circular platform
-    const PlatformGeometry = new THREE.CylinderGeometry(10, 10, 0.75, 32);
+    const PlatformGeometry = new THREE.CylinderGeometry(10, 10, 1, 32);
     const PlatformMaterial = new THREE.MeshStandardMaterial({ color: 0x7CFC00 }); // Grass colour
     const platform = new THREE.Mesh(PlatformGeometry, PlatformMaterial);
     platform.position.y = 0;
@@ -36,13 +36,13 @@ export function CreateFlowerField(scene, flowerParams) {
             isValidPosition = placedPositions.every((pos) => position.distanceTo(pos) >= minDistance);
         }
 
-        // Create the flower at the validated position
+        // Create the flower stem
         const flower = new THREE.Mesh(
             new THREE.CylinderGeometry(0.1, 0.1, StemHeight, 6),
             FlowerMaterial
         );
 
-        flower.position.copy(position);
+        flower.position.set(position.x, StemHeight / 2, position.z);
         scene.add(flower);
         placedPositions.push(position);  // Save position
 
