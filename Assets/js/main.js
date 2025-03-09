@@ -48,8 +48,8 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Define max limits
-const limits = {
+// Define max limits for flowers
+const flowerParamsLimits = {
     maxFlowers: 200,
     minFlowers: 1,
     minStem: 0.25,
@@ -61,7 +61,7 @@ const limits = {
 // Grass parameters
 const grassParams = {
     count: 1000,        // Number of grass blades
-    height: 0.5,          // Height of each blade
+    height: 0.5,        // Height of each blade
     width: 0.1,         // Width of each blade
     windSpeed: 1.0,     // Speed of wind sway
     areaRadius: 10      // Area covered by grass
@@ -82,11 +82,12 @@ function enforceLimits(value, min, max, name) {
 
 // Function to regenerate flower field
 window.regenerateFlowerField = () => {
-    const flowerCount = enforceLimits(parseInt(document.getElementById('flowerCount').value), limits.minFlowers, limits.maxFlowers, "Flower count");
-    const minStemHeight = enforceLimits(parseFloat(document.getElementById('minStemHeight').value), limits.minStem, limits.maxStem, "Min stem height");
-    const maxStemHeight = enforceLimits(parseFloat(document.getElementById('maxStemHeight').value), minStemHeight, limits.maxStem, "Max stem height");
-    const minPetalCount = enforceLimits(parseInt(document.getElementById('minPetalCount').value), limits.minPetals, limits.maxPetals, "Min petal count");
-    const maxPetalCount = enforceLimits(parseInt(document.getElementById('maxPetalCount').value), minPetalCount, limits.maxPetals, "Max petal count");
+    // Flower controls with validation
+    const flowerCount = enforceLimits(parseInt(document.getElementById('flowerCount').value), flowerParamsLimits.minFlowers, flowerParamsLimits.maxFlowers, "Flower count");
+    const minStemHeight = enforceLimits(parseFloat(document.getElementById('minStemHeight').value), flowerParamsLimits.minStem, flowerParamsLimits.maxStem, "Min stem height");
+    const maxStemHeight = enforceLimits(parseFloat(document.getElementById('maxStemHeight').value), minStemHeight, flowerParamsLimits.maxStem, "Max stem height");
+    const minPetalCount = enforceLimits(parseInt(document.getElementById('minPetalCount').value), flowerParamsLimits.minPetals, flowerParamsLimits.maxPetals, "Min petal count");
+    const maxPetalCount = enforceLimits(parseInt(document.getElementById('maxPetalCount').value), minPetalCount, flowerParamsLimits.maxPetals, "Max petal count");
 
     const flowerParams = {
         count: flowerCount,
@@ -96,7 +97,19 @@ window.regenerateFlowerField = () => {
         maxPetalCount: maxPetalCount
     };
 
-    // Remove existing flowers
+    // Grass controls with validation
+    const grassCount = enforceLimits(parseInt(document.getElementById('grassCount').value), 100, 5000, "Grass count");
+    const grassHeight = enforceLimits(parseFloat(document.getElementById('grassHeight').value), 0.1, 2, "Grass height");
+    const grassWidth = enforceLimits(parseFloat(document.getElementById('grassWidth').value), 0.01, 0.5, "Grass width");
+    const windSpeed = enforceLimits(parseFloat(document.getElementById('windSpeed').value), 0, 5, "Wind speed");
+
+    // Update grass parameters
+    grassParams.count = grassCount;
+    grassParams.height = grassHeight;
+    grassParams.width = grassWidth;
+    grassParams.windSpeed = windSpeed;
+
+    // Remove existing flowers and grass
     while (scene.children.length > 2) {
         scene.remove(scene.children[2]);
     }
