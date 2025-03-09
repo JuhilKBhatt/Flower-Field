@@ -47,63 +47,36 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Create the flower field
+// Define max limits
+const limits = {
+    maxFlowers: 200,
+    minFlowers: 1,
+    minStem: 0.25,
+    maxStem: 3,
+    minPetals: 1,
+    maxPetals: 20
+};
+
+// Function to enforce input limits
+function enforceLimits(value, min, max, name) {
+    if (value < min) {
+        alert(`${name} cannot be less than ${min}. Limit applied.`);
+        return min;
+    }
+    if (value > max) {
+        alert(`${name} cannot exceed ${max}. Limit applied.`);
+        return max;
+    }
+    return value;
+}
+
+// Function to regenerate flower field
 window.regenerateFlowerField = () => {
-    // Define max limits
-    const maxFlowers = 200;
-    const minFlowers = 1;
-    const minStem = 0.25;
-    const maxStem = 3;
-    const minPetals = 1;
-    const maxPetals = 20;
-
-    // Get input values and enforce limits
-    let flowerCount = parseInt(document.getElementById('flowerCount').value);
-    let minStemHeight = parseFloat(document.getElementById('minStemHeight').value);
-    let maxStemHeight = parseFloat(document.getElementById('maxStemHeight').value);
-    let minPetalCount = parseInt(document.getElementById('minPetalCount').value);
-    let maxPetalCount = parseInt(document.getElementById('maxPetalCount').value);
-
-    // Check and correct values if out of bounds
-    if (flowerCount > maxFlowers) {
-        flowerCount = maxFlowers;
-        alert(`Maximum allowed flowers is ${maxFlowers}. Limit applied.`);
-    } else if (flowerCount < minFlowers) {
-        flowerCount = minFlowers;
-        alert(`Minimum allowed flowers is ${minFlowers}. Limit applied.`);
-    }
-
-    if (minStemHeight < minStem) {
-        minStemHeight = minStem;
-        alert(`Minimum stem height is ${minStem}. Limit applied.`);
-    } else if (minStemHeight > maxStem) {
-        minStemHeight = maxStem;
-        alert(`Maximum stem height is ${maxStem}. Limit applied.`);
-    }
-
-    if (maxStemHeight > maxStem) {
-        maxStemHeight = maxStem;
-        alert(`Maximum stem height is ${maxStem}. Limit applied.`);
-    } else if (maxStemHeight < minStemHeight) {
-        maxStemHeight = minStemHeight;
-        alert(`Max stem height cannot be less than min stem height. Corrected.`);
-    }
-
-    if (minPetalCount < minPetals) {
-        minPetalCount = minPetals;
-        alert(`Minimum petal count is ${minPetals}. Limit applied.`);
-    } else if (minPetalCount > maxPetals) {
-        minPetalCount = maxPetals;
-        alert(`Minimum petal count cannot exceed ${maxPetals}. Limit applied.`);
-    }
-
-    if (maxPetalCount > maxPetals) {
-        maxPetalCount = maxPetals;
-        alert(`Maximum petal count is ${maxPetals}. Limit applied.`);
-    } else if (maxPetalCount < minPetalCount) {
-        maxPetalCount = minPetalCount;
-        alert(`Max petal count cannot be less than min petal count. Corrected.`);
-    }
+    const flowerCount = enforceLimits(parseInt(document.getElementById('flowerCount').value), limits.minFlowers, limits.maxFlowers, "Flower count");
+    const minStemHeight = enforceLimits(parseFloat(document.getElementById('minStemHeight').value), limits.minStem, limits.maxStem, "Min stem height");
+    const maxStemHeight = enforceLimits(parseFloat(document.getElementById('maxStemHeight').value), minStemHeight, limits.maxStem, "Max stem height");
+    const minPetalCount = enforceLimits(parseInt(document.getElementById('minPetalCount').value), limits.minPetals, limits.maxPetals, "Min petal count");
+    const maxPetalCount = enforceLimits(parseInt(document.getElementById('maxPetalCount').value), minPetalCount, limits.maxPetals, "Max petal count");
 
     const flowerParams = {
         count: flowerCount,
@@ -113,13 +86,17 @@ window.regenerateFlowerField = () => {
         maxPetalCount: maxPetalCount
     };
 
+    // Remove existing flowers
     while (scene.children.length > 2) {
         scene.remove(scene.children[2]);
     }
 
+    // Create new flower field
     CreateFlowerField(scene, flowerParams);
 };
-window.regenerateFlowerField();  // Initial field
+
+// Initial field generation
+window.regenerateFlowerField();
 
 // Animation loop
 function animate() {
