@@ -1,6 +1,6 @@
 import * as THREE from './build/three.module.js';
 import { OrbitControls } from './build/OrbitControls.js';
-import { CreateFlowerField } from './flowerField.js';
+import { CreateFlowerField } from './FlowerField.js';
 import { animatePetals } from './animationManager.js';
 import { PetalEffect } from './PetalEffect.js';
 import { CreateGrassField, animateGrass } from './GrassField.js';
@@ -60,11 +60,11 @@ const flowerParamsLimits = {
 
 // Grass parameters
 const grassParams = {
-    count: 1000,        // Number of grass blades
-    height: 0.5,        // Height of each blade
-    width: 0.1,         // Width of each blade
-    windSpeed: 1.0,     // Speed of wind sway
-    areaRadius: 10      // Area covered by grass
+    count: 1000,
+    height: 0.5,
+    width: 0.1,
+    windSpeed: 1.0,
+    areaRadius: 10
 };
 
 // Function to enforce input limits

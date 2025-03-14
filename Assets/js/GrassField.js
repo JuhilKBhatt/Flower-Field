@@ -1,4 +1,5 @@
 import * as THREE from './build/three.module.js';
+import { RandomNumber } from './Utils.js';
 
 let grassInstances = [];  // Store references to grass blades
 
