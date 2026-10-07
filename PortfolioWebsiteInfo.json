@@ -1,7 +1,17 @@
 {
   "title": "Flower Field",
-  "description": "A serene and vibrant flower field simulation showcasing various types of flowers in a dynamic environment.",
-  "language": ["JavaScript", "Three.js"],
+  "description": "An interactive 3D procedural flower field simulation built with Three.js, featuring dynamic botanical generation, realistic wind-swaying grass blade animations, raycasted petal burst particle effects, and customizable field parameters.",
+  "techStack": {
+    "Frontend": [
+      "JavaScript",
+      "Three.js",
+      "HTML5",
+      "CSS3"
+    ],
+    "DevSecOps": [
+      "GitHub"
+    ]
+  },
   "liveDemo": "",
   "images": [
     "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1753000750/Flower-Field-img-1_g8oous.png",
@@ -9,7 +19,15 @@
   ],
   "videoDemo": "https://res.cloudinary.com/dmj4ggkjq/video/upload/v1753000852/Flower-Field-Video_kkvjtg.mov",
   "Priority": 2,
+  "category": "Web App",
   "type": "Solo",
-  "version": "Aplha",
+  "version": "Alpha",
+  "versionNumber": "0.1.0",
+  "Highlights": [
+    "Procedural flower generation modeling organic variations in stem height, petal count, circular distribution, and randomized vibrant color palettes",
+    "Dynamic grass field simulation generating individual blade meshes animated with harmonic wind sway vectors and adjustable wind velocity",
+    "Interactive raycasted particle effect triggering 3D burst physics and velocity-driven dispersal of flower petals upon ground clicks",
+    "Real-time control panel interface enabling dynamic regeneration and parameter bounds validation across flower and grass densities"
+  ],
   "Visibilty": true
 }
